@@ -2,6 +2,23 @@
 #include <cstdlib>
 using namespace std;
 
+void resetScreen()
+{
+    system("cls");
+    system("color 0F");
+}
+void SetScreenColor(bool Right)
+{
+    if (Right)
+        system("color 2F"); // Turn screen green if the answer is correct.
+    else
+    {
+        system("color 4F"); // Turn screen red if the answer is wrong.
+        cout << "\a"; // Play an alert sound.
+    }
+}
+
+
 int readNumber(string message)
 {
     int num;
@@ -168,11 +185,13 @@ void generateQuestion(stQuiz& quiz, stQuestion& q)
 
     if (q.answerResult)
     {
+        SetScreenColor(q.answerResult);
         cout<< "Right Answer :-)\n" <<endl;
         quiz.rightAnswers++;
     }
     else
     {
+        SetScreenColor(q.answerResult);
         cout<< "Wrong Answer :-(" <<endl;
         cout<< "The right answer is: " << q.correctAnswer <<endl<<endl;
         quiz.wrongAnswers++;
@@ -211,10 +230,12 @@ void passFail(stQuiz quiz)
 {   
     if (quiz.rightAnswers > quiz.wrongAnswers)
     {
+        SetScreenColor(quiz.rightAnswers > quiz.wrongAnswers);
         cout << "\tFinal Result is Pass :-)";
     }    
     else
     {
+        SetScreenColor(quiz.rightAnswers > quiz.wrongAnswers);
         cout << "\tFinal Result is Fail :-(";
     }    
 }
@@ -234,7 +255,27 @@ void printQuiz(stQuiz quiz)
     cout << "________________________________________\n" <<endl;
 }
 
+void startGame()
+{
+    string replay;
+    do
+    {
+        resetScreen();
+        stQuiz quiz = playQuiz();
+        printQuiz(quiz);
+
+        cout << "Do you want to play again? Y/N" <<endl;
+        cin>>replay;
+
+    } while (replay == "y" || replay == "Y");
+    
+}
+
 int main()
 {    
+    srand((unsigned)time(NULL));
+
+    startGame();
+    
     return 0;
 }
