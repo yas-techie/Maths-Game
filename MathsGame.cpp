@@ -207,6 +207,33 @@ stQuiz playQuiz()
     return quiz;
 }
 
+void passFail(stQuiz quiz)
+{   
+    if (quiz.rightAnswers > quiz.wrongAnswers)
+    {
+        cout << "\tFinal Result is Pass :-)";
+    }    
+    else
+    {
+        cout << "\tFinal Result is Fail :-(";
+    }    
+}
+
+void printQuiz(stQuiz quiz)
+{
+    cout << "\n________________________________________\n" <<endl;
+    passFail(quiz);    
+    cout << "\n________________________________________\n" <<endl;
+    
+    cout << "Number of Questions: " << quiz.qNum <<endl;
+    cout << "Questions Level    : " << quiz.qLevel <<endl;
+    cout << "OpType             : " << quiz.qOpType <<endl;
+    cout << "Number of Right Answers: " << quiz.rightAnswers <<endl;
+    cout << "Number of Wrong Answers: " << quiz.wrongAnswers <<endl;
+
+    cout << "________________________________________\n" <<endl;
+}
+
 int main()
 {    
     return 0;
