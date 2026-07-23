@@ -36,6 +36,34 @@ enLevel GetRandomLevel()
     return level;
 }
 
+string printLevel(enLevel level)
+{
+    string arrLevelText[4] = { "Easy","Med","Hard","Mix" };
+    return arrLevelText[level - 1];
+}
+int gameLevel(enLevel level)
+{
+    switch (level)
+    {
+    case enLevel::Easy:
+        return randomNumber(1, 10);
+        break;
+
+    case enLevel::Med:
+        return randomNumber(10, 50);
+        break; 
+        
+    case enLevel::Hard:
+        return randomNumber(50, 100);
+        break;
+
+    case enLevel::Mix:
+        return randomNumber(1, 100);
+        break;     
+    }
+    return randomNumber(1, 100);
+}
+
 enOpType readOpType()
 {
     int opType;
@@ -50,6 +78,55 @@ enOpType GetRandomOperationType()
 {
     enOpType opType = (enOpType) randomNumber(1, 4);
     return opType;
+}
+
+string printType(enOpType opType)
+{
+    switch (opType)
+    {
+    case enOpType::Add:
+        return "+";
+        break;
+
+    case enOpType::Sub:
+        return "-";
+        break; 
+        
+    case enOpType::Mul:
+        return "x";
+        break;
+
+    case enOpType::Div:
+        return "/";
+        break;    
+        
+    case enOpType::MixOp:
+        return "Mix";
+        break;     
+    }
+    return "Mix";
+}
+int calacNumber(enOpType opType, int num1, int num2)
+{
+    switch (opType)
+    {
+    case enOpType::Add:
+        return num1 + num2;
+        break;
+
+    case enOpType::Sub:
+        return num1 - num2;
+        break; 
+        
+    case enOpType::Mul:
+        return num1 * num2;
+        break;
+
+    case enOpType::Div:
+        return num1 / num2;
+        break;       
+    }
+    return num1 + num2;
 }
 
 struct stQuestion
