@@ -179,6 +179,34 @@ void generateQuestion(stQuiz& quiz, stQuestion& q)
     }
 }
 
+stQuiz playQuiz()
+{
+    stQuestion q;
+    stQuiz quiz;
+    
+    quiz.qNum = readNumber("How Many Questions do you want to answer? ");
+    quiz.QuestionList[quiz.qNum];
+
+    q.level = readLevel();
+    quiz.qLevel = printLevel(q.level);
+    if (q.level == enLevel::Mix)
+        q.level = GetRandomLevel(); 
+
+    q.opType = readOpType();
+    quiz.qOpType = printType(q.opType);
+    if (q.opType == enOpType::MixOp)
+        q.opType = GetRandomOperationType();
+
+    
+    for (int i = 1; i <= quiz.qNum; i++)
+    {
+        cout<<endl;
+        cout<< "Question [" << i << "/" << quiz.qNum << "]\n" <<endl;
+        generateQuestion(quiz, q);
+    }
+    return quiz;
+}
+
 int main()
 {    
     return 0;
