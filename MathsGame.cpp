@@ -150,6 +150,35 @@ struct stQuiz
     bool isPass;
 };
 
+bool isCorrect(stQuestion q)
+{
+    return (q.correctAnswer == q.playerAnswer);
+}
+
+void generateQuestion(stQuiz& quiz, stQuestion& q)
+{
+    q.num1 = gameLevel(q.level);
+    q.num2 = gameLevel(q.level);
+    cout<< q.num1 <<endl;
+    cout<< q.num2  << " " << printType(q.opType) <<endl;
+
+    q.correctAnswer = calacNumber(q.opType, q.num1, q.num2);
+    q.playerAnswer = readNumber("__________\n");
+    q.answerResult = isCorrect(q);
+
+    if (q.answerResult)
+    {
+        cout<< "Right Answer :-)\n" <<endl;
+        quiz.rightAnswers++;
+    }
+    else
+    {
+        cout<< "Wrong Answer :-(" <<endl;
+        cout<< "The right answer is: " << q.correctAnswer <<endl<<endl;
+        quiz.wrongAnswers++;
+    }
+}
+
 int main()
 {    
     return 0;
