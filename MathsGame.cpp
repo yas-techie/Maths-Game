@@ -123,7 +123,7 @@ string printType(enOpType opType)
     }
     return "Mix";
 }
-int calacNumber(enOpType opType, int num1, int num2)
+int calcNumber(enOpType opType, int num1, int num2)
 {
     switch (opType)
     {
@@ -176,10 +176,18 @@ void generateQuestion(stQuiz& quiz, stQuestion& q)
 {
     q.num1 = gameLevel(q.level);
     q.num2 = gameLevel(q.level);
+
+    if (q.opType == enOpType::Div)
+    {
+        while (q.num2 == 0)
+        {
+            q.num2 = gameLevel(q.level);
+        }
+    }
     cout<< q.num1 <<endl;
     cout<< q.num2  << " " << printType(q.opType) <<endl;
 
-    q.correctAnswer = calacNumber(q.opType, q.num1, q.num2);
+    q.correctAnswer = calcNumber(q.opType, q.num1, q.num2);
     q.playerAnswer = readNumber("__________\n");
     q.answerResult = isCorrect(q);
 
